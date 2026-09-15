@@ -92,7 +92,7 @@ export default function Home() {
           75%       { transform: translateY(4px) rotate(-1deg); }
         }
       `}</style>
-
+      
       <main style={{
         minHeight: '100vh',
         background: '#00010a',
