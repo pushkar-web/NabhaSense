@@ -70,7 +70,7 @@ def generate_action_plan(city: str, stress_category: str, wbgt: float, utci: flo
     """
     Single entry point — produces the full automated advisory for a city
     given its current (or forecasted) thermal-stress and mortality-risk
-    reading.
+    reading. 
     """
     # Rough vulnerable-population estimate (elderly + outdoor workers,
     # capped so double-counted individuals don't inflate beyond total pop)
