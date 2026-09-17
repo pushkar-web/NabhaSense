@@ -777,7 +777,7 @@ Make sure you have:
 Clone the repository:
 
 ```bash
-git clone https://github.com/DashamiJituri/NabhaSense.git
+git clone https://github.com/pushkar-web/NabhaSense.git
 ```
 
 Navigate into the project:
@@ -995,7 +995,7 @@ The system contains estimated and simulated components, and its outputs should t
 If you find **NabhaSense** interesting, consider giving the repository a ⭐.
 
 **Repository:**
-https://github.com/DashamiJituri/NabhaSense
+https://github.com/pushkar-web/NabhaSense.git
 
 ---
 
