@@ -1,137 +1,1009 @@
-# 🛰️ NabhaSense — Urban Heat Intelligence Platform
+# 🌡️ NabhaSense — Urban Heat Intelligence Platform
 
-<div align="center">
-
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)](https://nabha-sense.vercel.app)
-[![API Docs](https://img.shields.io/badge/API%20Docs-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://nabhasense-backend.onrender.com/docs)
-[![ISRO BAH 2026](https://img.shields.io/badge/ISRO%20BAH%202026-Hackathon%20Project-FF9933?style=for-the-badge&logo=spacex&logoColor=white)](https://hack2skill.com/event/bah2026)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-
-<p align="center">
-  <b>Physics-informed AI/ML platform to detect urban heat stress hotspots, quantify thermal drivers, and simulate optimized cooling interventions across Indian metropolitan regions.</b>
-</p>
-
-[**Explore Live Demo**](https://nabha-sense.vercel.app) • [**Interactive API Docs**](https://nabhasense-backend.onrender.com/docs) • [**ISRO BAH 2026**](https://hack2skill.com/event/bah2026)
-
-</div>
+> An AI/ML-powered urban heat intelligence platform for analyzing heat conditions, identifying heat-risk hotspots, evaluating thermal stress, comparing cities, and simulating cooling interventions.
 
 ---
 
-## 📖 Overview
+## 📌 Overview
 
-**NabhaSense** is a next-generation urban climate resilience and thermal stress decision-support platform developed for the **ISRO Bharatiya Antariksh Hackathon (BAH) 2026**.
+**NabhaSense** is a full-stack AI/ML platform designed to analyze and visualize urban heat conditions using environmental, weather, thermal, and demographic information.
 
-Rapid urbanization and climate volatility have intensified the **Surface Urban Heat Island (SUHI)** phenomenon across Indian cities, exposing dense populations and outdoor labor workforces to hazardous thermal extremes. Conventional monitoring systems rely solely on ambient air temperature or satellite snapshots that lack localized biometeorological context.
+The system combines **Machine Learning, weather data, thermal indices, geospatial visualization, risk analysis, and intervention simulation** into a single platform.
 
-NabhaSense bridges earth observation analytics and clinical human heat-stress modeling by combining:
-1. **Satellite Remote Sensing & Physics Metrics:** Land Surface Temperature (LST), Normalized Difference Vegetation Index (NDVI), Normalized Difference Built-up Index (NDBI), and Surface Urban Heat Island Intensity (SUHII).
-2. **Human Biometeorology Indices:** Wet Bulb Globe Temperature (WBGT), Universal Thermal Climate Index (UTCI), and Heat Index calculated in real time with **localized acclimatization shifts** per city.
-3. **Socio-Demographic Vulnerability:** Ward-level Heat Stress Risk Index (HSRI) combining **Hazard × Vulnerability × Exposure** based on elderly demographics, outdoor worker percentages, and living conditions.
-4. **Actionable Mitigation:** A physics-grounded scenario simulator evaluating the thermal cooling impact of urban tree canopy, cool roofs (albedo modification), and surface water bodies.
+NabhaSense helps answer four important questions:
 
----
-
-## ⚡ Key Features
-
-- **🌡️ Real-Time Atmospheric & Thermal Telemetry:** Integrates live weather parameters (temperature, relative humidity, wind speed, solar radiation) via Open-Meteo API alongside historical LST baselines.
-- **🤖 Random Forest Heat Risk Classifier:** Predicts multi-tier urban heat risk (`Low`, `Medium`, `High`, `Extreme`) with confidence scoring and dominant heating driver identification.
-- **🗺️ Interactive Geospatial Hotspot Mapping:** Dynamic Leaflet map visualizing ward-level hotspot clusters with pulsing markers, thermal gradients, and vulnerability indicators.
-- **👥 Mortality Risk & Ward-Level HSRI:** Computes Heat Stress Risk Index (HSRI) across individual municipal wards, assessing hospitalization spike probabilities and mortality risk for vulnerable populations.
-- **📅 3–5 Day Dynamic Heat Forecast:** Multi-day heat-mortality projections dynamically updating ward-level risk tiers against predicted atmospheric conditions.
-- **🧪 Physics-Based Cooling Simulator:** Interactive intervention testbed simulating temperature reduction, risk tier downgrades, and estimated population benefit from tree cover expansion, cool roof deployment, and water bodies.
-- **🚨 Automated Heat Action Plan (HAP) & Alerts:** Generates actionable civic advisories (cooling center activation, outdoor work restrictions, power grid alert thresholds) with SMS/WhatsApp dispatch previews.
-- **🏙️ Multi-City Benchmark Engine:** Concurrent asynchronous comparison across 7 major Indian metropolises (Mumbai, Delhi, Bengaluru, Chennai, Kolkata, Hyderabad, Ahmedabad).
+> **Where is the heat risk?**
+> **What factors contribute to it?**
+> **Who is more vulnerable?**
+> **What interventions could reduce the risk?**
 
 ---
 
-## 🛠️ Technology Stack
+# 🎯 Project Objectives
 
-| Layer | Technologies |
-| :--- | :--- |
-| **Frontend** | [Next.js 14](https://nextjs.org/) (App Router), [TypeScript](https://www.typescriptlang.org/), [Tailwind CSS](https://tailwindcss.com/), [Framer Motion](https://www.framer.com/motion/), [Leaflet](https://leafletjs.com/) / [React-Leaflet](https://react-leaflet.js.org/), [Lucide React](https://lucide.dev/) |
-| **Backend** | [FastAPI](https://fastapi.tiangolo.com/), [Python 3.11+](https://www.python.org/), [Scikit-learn](https://scikit-learn.org/), [NumPy](https://numpy.org/), [Uvicorn](https://www.uvicorn.org/) |
-| **Data & APIs** | [Open-Meteo Weather & Forecast API](https://open-meteo.com/), Satellite Earth Observation Baselines (LST, NDVI, NDBI), Census & Municipal Demographics |
-| **Deployment** | [Vercel](https://vercel.com/) (Frontend), [Render](https://render.com/) (Backend Web Service) |
+The main objectives of NabhaSense are to:
 
----
-
-## 📡 API Reference
-
-The backend exposes a fully documented REST API. Interactive Swagger UI is available at [`/docs`](https://nabhasense-backend.onrender.com/docs).
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/health` | API service health check |
-| `GET` | `/heat/analysis/{city}` | Comprehensive heat analysis, ML risk classification, thermal metrics, and demographics |
-| `GET` | `/heat/thermal/{city}` | WBGT, Heat Index, UTCI, and acclimatization adjustments |
-| `GET` | `/heat/mortality/{city}` | City- and ward-level Mortality Risk Index and HSRI calculations |
-| `GET` | `/heat/forecast/{city}` | 3-5 day dynamic heat forecast and ward-level risk projections |
-| `GET` | `/heat/action-plan/{city}` | Automated civic Heat Action Plan advisory and intervention directives |
-| `GET` | `/heat/alert/preview/{city}` | SMS / WhatsApp alert message preview and dispatch criteria |
-| `POST` | `/heat/alert/send` | Send / simulate emergency civic notification |
-| `POST` | `/heat/simulate` | Physics simulation of cooling interventions (trees, cool roofs, water) |
-| `POST` | `/heat/action-plan/simulate` | Scenario simulator evaluating alert-level downgrades under intervention |
-| `GET` | `/heat/compare` | Parallelized multi-city thermal and risk comparative analysis |
+* Identify urban heat-risk hotspots
+* Analyze environmental and weather conditions
+* Estimate thermal stress using multiple thermal indices
+* Predict heat-risk categories using Machine Learning
+* Analyze population vulnerability and exposure
+* Estimate heat-related mortality risk
+* Forecast upcoming heat-risk conditions
+* Compare heat conditions across multiple cities
+* Simulate cooling interventions
+* Generate heat-action recommendations
 
 ---
 
-## 🚀 Local Development
+# ✨ Key Features
 
-### Prerequisites
-- **Node.js** 18.x or higher & **npm**
-- **Python** 3.10 or higher
-- **Git**
+## 🌡️ 1. Real-Time Weather Analysis
 
-### 1. Clone the Repository
+NabhaSense retrieves weather information through the **Open-Meteo API**.
+
+The system works with parameters such as:
+
+* Temperature
+* Relative humidity
+* Apparent temperature
+* Wind speed
+* Cloud cover
+* Shortwave radiation
+
+Weather and forecast responses are cached to reduce unnecessary API requests.
+
+---
+
+## 🤖 2. Machine Learning Heat-Risk Prediction
+
+The platform uses a **Random Forest Classifier** to classify urban heat risk.
+
+### Input Features
+
+```text
+LST
+NDVI
+NDBI
+Humidity
+Building Density
+```
+
+### Output Classes
+
+```text
+Low
+Medium
+High
+Extreme
+```
+
+The model also provides prediction probabilities that can be used as confidence information.
+
+---
+
+## 🗺️ 3. Interactive Heat-Risk Map
+
+The frontend provides a geospatial visualization of heat conditions.
+
+The map can display:
+
+* Heat-risk hotspots
+* Location coordinates
+* Temperature information
+* Heat-risk category
+* Environmental indicators
+* Risk-related information
+
+Users can visually explore areas with different levels of heat risk.
+
+---
+
+## 🧮 4. Thermal Stress Analysis
+
+NabhaSense calculates multiple thermal indicators rather than relying only on temperature.
+
+The system includes:
+
+* Heat Index
+* Wet-Bulb Temperature
+* Globe Temperature
+* WBGT
+* UTCI
+* Thermal Stress
+
+These indicators are combined to classify overall thermal stress.
+
+### Thermal Stress Categories
+
+```text
+Low
+Moderate
+High
+Very High
+Extreme
+```
+
+---
+
+# ❤️ 5. Heat-Related Mortality Risk
+
+NabhaSense includes a separate mortality-risk analysis component.
+
+The model considers factors such as:
+
+```text
+WBGT
+Heat Index
+Elderly Population %
+Outdoor Worker %
+```
+
+The system generates:
+
+* Mortality Risk Index
+* Hospitalization Spike Probability
+* Risk Tier
+
+### Risk Tiers
+
+```text
+Low
+Moderate
+High
+Critical
+```
+
+---
+
+# 👥 6. Vulnerability & Exposure Analysis
+
+Environmental heat alone does not determine overall heat risk.
+
+NabhaSense also considers population vulnerability and exposure.
+
+### Vulnerability Factors
+
+* Elderly population
+* Demographic characteristics
+
+### Exposure Factors
+
+* Outdoor workers
+* Illiteracy
+* Poor housing conditions
+* Electricity access
+* Water access
+
+These components contribute to the **Heat Stress Risk Index (HSRI)**.
+
+```text
+HSRI = Hazard × Vulnerability × Exposure
+```
+
+---
+
+# 🔮 7. Heat-Risk Forecasting
+
+NabhaSense supports short-term heat-risk forecasting.
+
+The forecasting pipeline processes:
+
+```text
+Weather Forecast
+      ↓
+Peak Daily Temperature
+      ↓
+Thermal Indices
+      ↓
+Thermal Stress
+      ↓
+Mortality Risk
+      ↓
+Heat-Risk Forecast
+```
+
+Forecast analysis can be performed for multiple days.
+
+---
+
+# 🧊 8. Cooling Intervention Simulator
+
+NabhaSense provides a scenario-based intervention simulator.
+
+Users can explore the estimated impact of different cooling strategies.
+
+### 🌳 Tree Cover
+
+Simulates the impact of increasing urban vegetation.
+
+### 🏠 Cool Roofs
+
+Simulates cooling through increased cool-roof coverage and surface reflectivity.
+
+### 💧 Water Bodies
+
+Estimates the cooling contribution of additional water-body coverage.
+
+### ☀️ Albedo Improvement
+
+Simulates the effect of increasing surface reflectivity.
+
+---
+
+## Intervention Workflow
+
+```text
+Current Heat Condition
+          │
+          ▼
+ Select Intervention
+          │
+    ┌─────┼─────┬─────┐
+    ▼     ▼     ▼     ▼
+ Trees  Roofs  Water  Albedo
+    │     │     │     │
+    └─────┴─────┴─────┘
+          │
+          ▼
+    Estimated Cooling
+          │
+          ▼
+   Adjusted Conditions
+          │
+          ▼
+  Updated Heat-Risk Level
+```
+
+---
+
+# 🚨 9. Heat Action Plan
+
+NabhaSense converts heat-risk information into recommended actions.
+
+Depending on the calculated risk level, the system can generate recommendations related to:
+
+* Cooling-center activation
+* Outdoor-work advisories
+* Hydration and water breaks
+* Power-grid preparedness
+* Hospital-capacity preparedness
+* Heat-alert levels
+
+### Alert Levels
+
+```text
+Watch
+Yellow Alert
+Orange Alert
+Red Alert
+```
+
+---
+
+# 🏙️ 10. Multi-City Comparison
+
+NabhaSense supports comparative analysis across multiple cities.
+
+The current system includes:
+
+```text
+Mumbai
+Thane
+Delhi
+Bangalore
+Chennai
+Hyderabad
+Pune
+```
+
+City comparison can include:
+
+* Temperature
+* LST
+* SUHII
+* NDVI
+* NDBI
+* WBGT
+* UTCI
+* Thermal stress
+* Mortality risk
+* HSRI
+
+This allows users to compare heat conditions across different urban environments.
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                         ┌───────────────────────┐
+                         │         USER          │
+                         │                       │
+                         │ City Selection        │
+                         │ Heat Analysis         │
+                         │ Forecast              │
+                         │ Simulation            │
+                         └───────────┬───────────┘
+                                     │
+                                     ▼
+                         ┌───────────────────────┐
+                         │       FRONTEND        │
+                         │                       │
+                         │ Next.js               │
+                         │ React                 │
+                         │ TypeScript            │
+                         │ Leaflet / Maps        │
+                         │ Charts & Visuals      │
+                         └───────────┬───────────┘
+                                     │
+                                     │ REST API
+                                     ▼
+                    ┌────────────────────────────────┐
+                    │          FASTAPI BACKEND        │
+                    │                                │
+                    │           main.py              │
+                    └───────────────┬────────────────┘
+                                    │
+                                    ▼
+                         ┌───────────────────────┐
+                         │      HEAT ROUTER      │
+                         │                       │
+                         │ Analysis              │
+                         │ Forecast              │
+                         │ Hotspots              │
+                         │ Mortality             │
+                         │ Simulation            │
+                         │ Comparison             │
+                         │ Action Plan            │
+                         └───────────┬───────────┘
+                                     │
+              ┌──────────────────────┼──────────────────────┐
+              │                      │                      │
+              ▼                      ▼                      ▼
+   ┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐
+   │ Weather &        │   │ Thermal Analysis │   │ Demographic &    │
+   │ Environmental    │   │                  │   │ Exposure Data    │
+   │ Data             │   │ WBGT             │   │                  │
+   │                  │   │ UTCI             │   │ Vulnerability    │
+   │ Open-Meteo       │   │ Heat Index       │   │ Exposure         │
+   │ Forecast         │   │ Thermal Stress   │   │ Population       │
+   └────────┬─────────┘   └────────┬─────────┘   └────────┬─────────┘
+            │                      │                      │
+            └──────────────────────┼──────────────────────┘
+                                   │
+                                   ▼
+                         ┌───────────────────────┐
+                         │    ML COMPONENTS      │
+                         │                       │
+                         │ Random Forest         │
+                         │ Heat-Risk Classifier  │
+                         │                       │
+                         │ Mortality-Risk        │
+                         │ Regressor             │
+                         └───────────┬───────────┘
+                                     │
+                                     ▼
+                         ┌───────────────────────┐
+                         │   DECISION SUPPORT    │
+                         │                       │
+                         │ HSRI                  │
+                         │ Heat Action Plan      │
+                         │ Cooling Simulation    │
+                         │ Risk Recommendations  │
+                         └───────────┬───────────┘
+                                     │
+                                     ▼
+                         ┌───────────────────────┐
+                         │    VISUAL OUTPUT      │
+                         │                       │
+                         │ Heat Maps              │
+                         │ Risk Indicators       │
+                         │ Forecasts             │
+                         │ Charts                │
+                         │ Recommendations       │
+                         └───────────────────────┘
+```
+
+---
+
+# 🔄 End-to-End Data Flow
+
+```text
+                    CITY SELECTION
+                          │
+                          ▼
+                  Weather API
+                          │
+            ┌─────────────┴─────────────┐
+            ▼                           ▼
+     Current Weather              Forecast Data
+            │                           │
+            ▼                           ▼
+     Environmental Data          Peak Conditions
+            │
+            ▼
+     Derived Metrics
+            │
+       ┌────┼────┐
+       ▼    ▼    ▼
+      LST  NDVI  NDBI
+       │    │    │
+       └────┼────┘
+            ▼
+      Heat-Risk Model
+            │
+            ▼
+      Heat-Risk Level
+            │
+       ┌────┴────┐
+       ▼         ▼
+ Thermal Data   Demographics
+       │         │
+       ▼         ▼
+ WBGT / UTCI  Vulnerability
+ Heat Index   + Exposure
+       │         │
+       └────┬────┘
+            ▼
+           HSRI
+            │
+            ▼
+     Mortality Risk
+            │
+            ▼
+      Heat Action Plan
+            │
+            ▼
+     Cooling Simulation
+            │
+            ▼
+       Final Insights
+```
+
+---
+
+# 🧠 Machine Learning Architecture
+
+## Heat-Risk Classifier
+
+```text
+Environmental Features
+          │
+          ▼
+┌─────────────────────────┐
+│     Feature Inputs      │
+│                         │
+│ LST                     │
+│ NDVI                    │
+│ NDBI                    │
+│ Humidity                │
+│ Building Density        │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│ Random Forest           │
+│ Classifier              │
+└────────────┬────────────┘
+             │
+             ▼
+      Risk Probabilities
+             │
+             ▼
+┌─────────────────────────┐
+│ Heat Risk Category      │
+│                         │
+│ Low / Medium / High /   │
+│ Extreme                 │
+└─────────────────────────┘
+```
+
+---
+
+## Mortality-Risk Model
+
+```text
+Thermal & Population Factors
+             │
+             ▼
+┌─────────────────────────┐
+│ WBGT                    │
+│ Heat Index              │
+│ Elderly Population %    │
+│ Outdoor Worker %        │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│ Random Forest           │
+│ Regression Models       │
+└────────────┬────────────┘
+             │
+             ▼
+┌─────────────────────────┐
+│ Mortality Risk Index    │
+│ Hospitalization Risk    │
+│ Risk Tier               │
+└─────────────────────────┘
+```
+
+---
+
+# 🧮 Thermal Analysis Pipeline
+
+```text
+Temperature
+     +
+Humidity
+     +
+Wind Speed
+     +
+Solar Radiation
+          │
+          ▼
+ Wet-Bulb Temperature
+          │
+          +
+ Globe Temperature
+          │
+          ▼
+         WBGT
+          │
+      ┌───┴────┐
+      ▼        ▼
+ Heat Index   UTCI
+      │        │
+      └───┬────┘
+          ▼
+    Thermal Stress
+          │
+          ▼
+    Risk Classification
+```
+
+---
+
+# 📊 Environmental Metrics
+
+## LST
+
+Land Surface Temperature represents the estimated surface-temperature condition used in heat analysis.
+
+---
+
+## NDVI
+
+Normalized Difference Vegetation Index is used as a vegetation-related indicator.
+
+Higher vegetation generally indicates greater availability of green cover.
+
+---
+
+## NDBI
+
+Normalized Difference Built-up Index represents built-up characteristics of an urban environment.
+
+---
+
+## SUHII
+
+Surface Urban Heat Island Intensity can be represented as:
+
+```text
+SUHII = Urban LST − Reference/Rural LST
+```
+
+This provides an indication of how much warmer the urban environment is compared with its reference area.
+
+---
+
+# 📈 Heat Stress Risk Index
+
+NabhaSense combines three major dimensions:
+
+```text
+          ┌─────────────┐
+          │   HAZARD    │
+          │             │
+          │ Heat /      │
+          │ Thermal     │
+          │ Conditions  │
+          └──────┬──────┘
+                 │
+                 ▼
+          ┌─────────────┐
+          │VULNERABILITY│
+          │             │
+          │ Population  │
+          │ Factors     │
+          └──────┬──────┘
+                 │
+                 ▼
+          ┌─────────────┐
+          │  EXPOSURE   │
+          │             │
+          │ Workers /   │
+          │ Housing etc.│
+          └──────┬──────┘
+                 │
+                 ▼
+             ┌───────┐
+             │ HSRI  │
+             └───────┘
+```
+
+Conceptually:
+
+```text
+HSRI = Hazard × Vulnerability × Exposure
+```
+
+---
+
+# 📁 Project Structure
+
+```text
+NabhaSense/
+│
+├── backend/
+│   │
+│   ├── app/
+│   │   │
+│   │   ├── data/
+│   │   │   ├── demographics.py
+│   │   │   ├── hospital_capacity.py
+│   │   │   └── real_data.py
+│   │   │
+│   │   ├── models/
+│   │   │   ├── predictor.py
+│   │   │   ├── mortality_predictor.py
+│   │   │   ├── hsri_calculator.py
+│   │   │   └── heat_action_plan.py
+│   │   │
+│   │   ├── routers/
+│   │   │   └── heat.py
+│   │   │
+│   │   ├── services/
+│   │   │   └── alert_service.py
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── thermal_indices.py
+│   │   │   ├── utci.py
+│   │   │   └── acclimatization.py
+│   │   │
+│   │   └── main.py
+│   │
+│   └── requirements.txt
+│
+├── frontend/
+│   │
+│   ├── app/
+│   │   ├── components/
+│   │   └── ...
+│   │
+│   ├── package.json
+│   └── ...
+│
+├── render.yaml
+├── Future Vedh (दिशा शोध चाचणी) Report.pdf
+└── README.md
+```
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+* Next.js
+* React
+* TypeScript
+* Leaflet
+* React Leaflet
+* Mapbox GL
+* Framer Motion
+* GSAP
+* Tailwind CSS
+* Lucide React
+
+## Backend
+
+* Python
+* FastAPI
+* Uvicorn
+* Scikit-learn
+* NumPy
+* Pandas
+* Requests
+
+## APIs & Data
+
+* Open-Meteo Weather API
+* Open-Meteo Forecast API
+* Open-Meteo Historical Weather API
+
+## Deployment
+
+* Vercel
+* Render
+
+---
+
+# 🔌 API Architecture
+
+The backend organizes heat-related functionality under:
+
+```text
+/heat
+```
+
+### Main API Endpoints
+
+| Endpoint                     | Method | Purpose                         |
+| ---------------------------- | ------ | ------------------------------- |
+| `/heat/analysis/{city}`      | GET    | Complete city heat analysis     |
+| `/heat/thermal/{city}`       | GET    | Thermal stress analysis         |
+| `/heat/mortality/{city}`     | GET    | Mortality and HSRI analysis     |
+| `/heat/forecast/{city}`      | GET    | Multi-day heat forecast         |
+| `/heat/action-plan/{city}`   | GET    | Heat action recommendations     |
+| `/heat/hotspots/{city}`      | GET    | Heat hotspot generation         |
+| `/heat/interventions/{city}` | GET    | Cooling interventions           |
+| `/heat/predict`              | POST   | Heat-risk prediction            |
+| `/heat/realdata/{city}`      | GET    | Environmental data              |
+| `/heat/compare`              | GET    | Multi-city comparison           |
+| `/heat/simulate`             | POST   | Cooling intervention simulation |
+| `/heat/alert/preview/{city}` | GET    | Alert preview                   |
+| `/heat/alert/send`           | POST   | Heat alert                      |
+| `/heat/action-plan/simulate` | POST   | Intervention simulation         |
+
+---
+
+# 🚀 Getting Started
+
+## Prerequisites
+
+Make sure you have:
+
+* Python 3.10+
+* Node.js
+* npm
+* Git
+
+---
+
+# ⚙️ Backend Setup
+
+Clone the repository:
+
 ```bash
-git clone https://github.com/pushkar-web/NabhaSense.git
+git clone https://github.com/DashamiJituri/NabhaSense.git
+```
+
+Navigate into the project:
+
+```bash
 cd NabhaSense
 ```
 
-### 2. Backend Setup
+Navigate to the backend:
+
 ```bash
-# Navigate to backend directory
 cd backend
-
-# Create and activate virtual environment
-python -m venv venv
-
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-# source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Start FastAPI development server
-uvicorn app.main:app --reload --port 8000
 ```
-Backend will be live at `http://localhost:8000` with Swagger docs at `http://localhost:8000/docs`.
 
-### 3. Frontend Setup
+Create a virtual environment:
+
+### Windows
+
 ```bash
-# From repository root, navigate to frontend directory
-cd frontend
+python -m venv venv
+```
 
-# Install Node dependencies
+Activate it:
+
+```bash
+venv\Scripts\activate
+```
+
+### macOS / Linux
+
+```bash
+python3 -m venv venv
+```
+
+Activate it:
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start the backend:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Backend:
+
+```text
+http://127.0.0.1:8000
+```
+
+FastAPI documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# 💻 Frontend Setup
+
+Open a new terminal.
+
+Navigate to:
+
+```bash
+cd NabhaSense/frontend
+```
+
+Install dependencies:
+
+```bash
 npm install
+```
 
-# Start Next.js development server
+Start the development server:
+
+```bash
 npm run dev
 ```
-Frontend will be accessible at `http://localhost:3000`.
+
+The frontend can then be accessed through the local Next.js development server.
 
 ---
 
-## 🌐 Deployment Links
+# 🔗 Frontend ↔ Backend Communication
 
-- **Production Frontend:** [https://nabha-sense.vercel.app](https://nabha-sense.vercel.app)
-- **Live API & Swagger Docs:** [https://nabhasense-backend.onrender.com/docs](https://nabhasense-backend.onrender.com/docs)
-- **Hackathon Reference:** [ISRO Bharatiya Antariksh Hackathon 2026](https://hack2skill.com/event/bah2026)
+```text
+┌───────────────────────┐
+│    Next.js Frontend   │
+│                       │
+│ React + TypeScript    │
+└───────────┬───────────┘
+            │
+            │ HTTP / REST
+            ▼
+┌───────────────────────┐
+│    FastAPI Backend    │
+│                       │
+│       /heat/*         │
+└───────────┬───────────┘
+            │
+     ┌──────┼───────┐
+     ▼      ▼       ▼
+ Weather    ML    Thermal
+   Data   Models  Analysis
+     │      │       │
+     └──────┼───────┘
+            ▼
+     Risk & Insights
+            │
+            ▼
+      Frontend UI
+```
 
 ---
 
-## 📄 License
+# ⚡ Performance
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+NabhaSense includes several performance-oriented components.
+
+### Caching
+
+Weather and forecast data can be cached to reduce repeated external API requests.
+
+### Concurrent Processing
+
+Multi-city comparison can process multiple city requests concurrently.
+
+### Modular Backend
+
+Backend functionality is separated into:
+
+```text
+Data
+Models
+Routers
+Services
+Utilities
+```
+
+This makes individual components easier to maintain and extend.
+
+---
+
+# 🧪 Project Limitations
+
+NabhaSense is a **prototype decision-support system** and some components use estimated or simulated values.
+
+Important considerations include:
+
+* Some environmental indicators are estimated rather than directly measured.
+* Certain ML components use synthetic training data.
+* Thermal calculations include empirical approximations.
+* Mortality-risk outputs are analytical estimates and are not clinical predictions.
+* Results should not be interpreted as official emergency or medical recommendations.
+
+These limitations are important when interpreting the outputs of the system.
+
+---
+
+# 🔮 Future Improvements
+
+Future versions of NabhaSense can include:
+
+* 🛰️ Integration of satellite-derived LST, NDVI, and NDBI
+* 🗺️ Higher-resolution ward-level geospatial data
+* 📚 Training ML models on larger real-world heat-event datasets
+* 🏥 Integration with validated health and hospitalization datasets
+* 🧠 Explainable AI for heat-risk predictions
+* 📊 Historical heat-risk trend analysis
+* 🔔 Real-time notification and alert systems
+* 📱 Improved mobile responsiveness
+* ☁️ Scalable cloud architecture
+* 🧪 Automated backend and ML testing
+* 📈 Advanced heat-risk forecasting
+* 🗃️ Database integration for historical records
+
+---
+
+# ⚠️ Disclaimer
+
+NabhaSense is developed as an **educational, analytical, and decision-support prototype**.
+
+The heat-risk scores, forecasts, mortality estimates, and intervention simulations should not be treated as official medical, emergency-management, or public-safety predictions.
+
+The system contains estimated and simulated components, and its outputs should therefore be interpreted as analytical indicators rather than verified real-world measurements.
+
+---
+
+# 👥 Team Signal Lost
+
+### Team Members
+
+| 👤 Member          |
+| ------------------ |
+| **Suchita Nigam**  |
+| **Dashami Jituri** |
+| **Pushkar Singh**  |
+| **Manas Nigam**    |
+
+> **Signal Lost** — Building an intelligent platform for urban heat analysis, risk assessment, and mitigation planning.
+
+---
+
+# ⭐ Project
+
+If you find **NabhaSense** interesting, consider giving the repository a ⭐.
+
+**Repository:**
+https://github.com/DashamiJituri/NabhaSense
+
+---
+
+## 👩‍💻 Team
+
+**Signal Lost**
+
+* Suchita Nigam
+* Dashami Jituri
+* Pushkar Singh
+* Manas Nigam
